@@ -1,5 +1,3 @@
-require 'mechanize'
-
 class QueriesController < ApplicationController
   before_action :find_query, only: [:show, :edit, :destroy]
 
@@ -8,11 +6,9 @@ class QueriesController < ApplicationController
     @queries = Query.includes(:query_results)
   end
 
-  def show
-  end
+  def show; end
 
-  def edit
-  end
+  def edit; end
 
   def destroy
     @query.destroy!
@@ -32,7 +28,6 @@ class QueriesController < ApplicationController
   end
 
   def query_params
-    params.require(:query).permit(:query)
+    params.require(:query).permit(:searched_quote)
   end
-
 end
