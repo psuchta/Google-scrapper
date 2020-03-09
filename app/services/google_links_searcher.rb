@@ -11,7 +11,7 @@ class GoogleLinksSearcher
     agent = Mechanize.new
     agent.get('https://www.google.pl/') do |page|
       search_results = page.form('f') do |google_form|
-        google_form.q = query
+        google_form.q = query.to_s
       end.submit
     end
     search_results
@@ -23,8 +23,17 @@ class GoogleLinksSearcher
     end
     only_serching_results.map do |link|
       url = link.href.to_s
-      url = url.split(/{=|&}/)[1]
-      { text: link.text, url: url }
+      url = url.split(%r{=|&})[1]
+      GoogleSearcherResult.new(link.text, url)
     end
+  end
+end
+
+class GoogleSearcherResult
+  attr_reader :text, :link
+
+  def initialize(text, link)
+    @text = text
+    @link = link
   end
 end
