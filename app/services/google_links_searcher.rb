@@ -24,16 +24,7 @@ class GoogleLinksSearcher
     only_serching_results.map do |link|
       url = link.href.to_s
       url = url.split(%r{=|&})[1]
-      GoogleSearcherResult.new(link.text, url)
+      OpenStruct.new(text: link.text, link: url)
     end
-  end
-end
-
-class GoogleSearcherResult
-  attr_reader :text, :link
-
-  def initialize(text, link)
-    @text = text
-    @link = link
   end
 end
