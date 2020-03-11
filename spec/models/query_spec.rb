@@ -3,7 +3,7 @@ describe Query do
     context 'with string parameter' do
       let(:searched_quote) { 'Rails' }
       let(:google_query) do
-        Query.create_with_results(query_params: { searched_quote: 'Rails' })
+        Query.create_with_results(query_params: { searched_quote: searched_quote })
       end
 
       it 'creates query object', :vcr do
@@ -13,13 +13,17 @@ describe Query do
       it 'creates query_results objects', :vcr do
         expect { google_query }.to change { QueryResult.count }.by(15)
       end
+
+      it 'creates query_object with correct attributes', :vcr do
+        expect(google_query).to have_attributes(searched_quote: searched_quote)
+      end
     end
 
     context 'with empty searched_quote parameter' do
       let(:empty_google_query) do
         Query.create_with_results(query_params: { searched_quote: '' })
       end
-      
+
       it 'creates query object', :vcr do
         expect { empty_google_query }.to change { Query.count }.by(1)
       end
