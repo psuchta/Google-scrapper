@@ -19,6 +19,7 @@ describe Query do
       let(:empty_google_query) do
         Query.create_with_results(query_params: { searched_quote: '' })
       end
+      
       it 'creates query object', :vcr do
         expect { empty_google_query }.to change { Query.count }.by(1)
       end
@@ -30,7 +31,6 @@ describe Query do
   end
 
   describe '.update_or_create_query_results' do
-
     context 'when new search result occured' do
       it 'creates new query_result objects', :vcr do
         query =  create(:query_with_query_results,
