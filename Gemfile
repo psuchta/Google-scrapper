@@ -53,10 +53,10 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
-  gem 'database_cleaner', '~> 1.8', '>= 1.8.3'
-  gem 'faker', '~> 2.10', '>= 2.10.2'
+  gem 'database_cleaner', '~> 1.8.3'
+  gem 'faker', '~> 2.10.2'
   gem 'vcr', '~> 5.1'
-  gem 'webmock', '~> 3.8', '>= 3.8.2'
+  gem 'webmock', '~> 3.8.2'
 
 end
 

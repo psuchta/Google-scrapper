@@ -271,10 +271,10 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   capybara (>= 2.15)
-  database_cleaner (~> 1.8, >= 1.8.3)
+  database_cleaner (~> 1.8.3)
   delayed_job_active_record (~> 4.1, >= 4.1.4)
   factory_bot_rails (= 5.1.1)
-  faker (~> 2.10, >= 2.10.2)
+  faker (~> 2.10.2)
   jbuilder (~> 2.7)
   listen (>= 3.0.5, < 3.2)
   mechanize (~> 2.7.6)
@@ -291,7 +291,7 @@ DEPENDENCIES
   vcr (~> 5.1)
   web-console (>= 3.3.0)
   webdrivers
-  webmock (~> 3.8, >= 3.8.2)
+  webmock (~> 3.8.2)
   webpacker (~> 4.0)
   whenever (~> 1.0)
 
