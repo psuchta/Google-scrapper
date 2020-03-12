@@ -4,17 +4,16 @@ describe QueryResult do
     let(:query_results_attr) { attributes_for(:query_result) }
 
     it 'returns QueryResult object' do
-      query_result = QueryResult.create_or_update_by_link(query_id: query.id,
+      query_result = QueryResult.create_or_update_by_link!(query_id: query.id,
                                                           text: query_results_attr[:text],
                                                           link: query_results_attr[:link])
       expect(query_result.class).to be(QueryResult)
-
     end
 
     context 'when query_result doesnt exist' do
       it 'creates query_result record' do
         expect do
-          QueryResult.create_or_update_by_link(query_id: query.id,
+          QueryResult.create_or_update_by_link!(query_id: query.id,
                                                text: query_results_attr[:text],
                                                link: query_results_attr[:link])
         end
@@ -23,7 +22,7 @@ describe QueryResult do
       end
 
       it 'created query_result has correct attributes' do
-        query_result = QueryResult.create_or_update_by_link(query_id: query.id,
+        query_result = QueryResult.create_or_update_by_link!(query_id: query.id,
                                                             text: query_results_attr[:text],
                                                             link: query_results_attr[:link])
         expect(query_result).to have_attributes(text: query_results_attr[:text],
@@ -35,7 +34,7 @@ describe QueryResult do
       it 'updates existed query_result record' do
         query_result = create(:query_result, query: query)
         new_title = 'New title 41243'
-        QueryResult.create_or_update_by_link(query_id: query.id,
+        QueryResult.create_or_update_by_link!(query_id: query.id,
                                              text: new_title,
                                              link: query_result.link)
         expect(query_result.reload).to have_attributes(text: new_title)
@@ -46,11 +45,10 @@ describe QueryResult do
       it 'raises error' do
         query_result = create(:query_result, query: query)
         expect do
-          QueryResult.create_or_update_by_link(query_id: 4112412,
+          QueryResult.create_or_update_by_link!(query_id: 4112412,
                                                text: query_result[:text],
                                                link: query_result[:link])
-        end
-          .to raise_error(ActiveRecord::RecordInvalid)
+        end.to raise_error(ActiveRecord::RecordInvalid)
       end
     end
   end
