@@ -48,7 +48,7 @@ describe QueryResult do
           QueryResult.create_or_update_by_link!(query_id: 4112412,
                                                text: query_result[:text],
                                                link: query_result[:link])
-        end.to raise_error(ActiveRecord::RecordInvalid)
+        end.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end
