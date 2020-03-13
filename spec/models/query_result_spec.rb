@@ -17,8 +17,8 @@ describe QueryResult do
                                                 text: query_results_attr[:text],
                                                 link: query_results_attr[:link])
         end
-        .to change { QueryResult.count }
-        .by(1)
+          .to change { QueryResult.count }
+          .by(1)
       end
 
       it 'created query_result has correct attributes' do

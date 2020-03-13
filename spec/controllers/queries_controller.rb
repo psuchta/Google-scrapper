@@ -14,36 +14,44 @@ describe QueriesController do
   end
 
   describe 'POST create' do
-    subject { post :create, params: params}
+    subject { post :create, params: params }
 
-    let(:params) do
-      {
-        query: { searched_quote: 'Rails' }
-      }
-    end
+    context 'with valid params' do
+      let(:params) do
+        {
+          query: { searched_quote: 'Rails' }
+        }
+      end
 
-    it 'returns 302 http status', :vcr do
-      subject
-      expect(response.status).to eq(302)
-    end
+      it 'returns 302 http status', :vcr do
+        subject
+        expect(response.status).to eq(302)
+      end
 
-    it 'creates a new query and query_results', :vcr do
-      expect { subject }.to change(Query, :count).by(+1)
-      .and change(QueryResult, :count).by(+15)
-    end
+      it 'creates a new query and query_results', :vcr do
+        expect { subject }.to change(Query, :count).by(+1)
+          .and change(QueryResult, :count).by(+15)
+      end
 
-    it 'redirects to :index', :vcr  do
-      subject
-      expect(response).to redirect_to(queries_path)
+      it 'redirects to queries#index', :vcr do
+        subject
+        expect(response).to redirect_to(queries_path)
+      end
     end
   end
 
   describe 'DELETE destroy' do
+    subject { delete :destroy, params: { id: query } }
     let!(:query) { create(:query_with_query_results, query_results_count: 3) }
 
-    it 'deletes the query' do
-      expect { delete :destroy, id: query }.to change(Query, :count).by(-1)
+    it 'deletes the query and query_results' do
+      expect { subject }.to change(Query, :count).by(-1)
+        .and change(QueryResult, :count).by(-3)
     end
 
+    it 'redirects to queries#index' do
+      subject
+      expect(response).to redirect_to(queries_path)
+    end
   end
 end
