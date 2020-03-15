@@ -9,11 +9,11 @@ class Query < ApplicationRecord
   end
 
   def update_or_create_query_results(search_engine: GoogleLinksSearcher.new)
-    google_results = search_engine.run_query(searched_quote)
-    google_results.each do |google_result|
+    search_results = search_engine.run_query(searched_quote)
+    search_results.each do |search_result|
       QueryResult.create_or_update_by_link!(query_id: id,
-                                            text: google_result.text,
-                                            link: google_result.link)
+                                            text: search_result.text,
+                                            link: search_result.link)
     end
     self
   end
