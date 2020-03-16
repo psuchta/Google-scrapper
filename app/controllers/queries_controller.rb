@@ -16,7 +16,7 @@ class QueriesController < ApplicationController
   end
 
   def create
-    Query.create_with_results(query_params)
+    Query.create_with_results(query_params: query_params)
     redirect_to queries_path
   end
 

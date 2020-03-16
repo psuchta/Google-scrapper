@@ -1,14 +1,14 @@
 class QueryResult < ApplicationRecord
-  belongs_to :query
+  belongs_to :query, required: true
 
-  def self.create_or_update_result(query_id, query_result_params)
-    url = query_result_params[:url]
-    text = query_result_params[:text]
-    query_result = self.where(query_id: query_id, link: url).first
+  def self.create_or_update_by_link!(query_id:, text:, link:)
+    query = ::Query.find(query_id)
+    query_result = find_by_query_id_and_link(query, link)
     if query_result.present?
-      query_result.update(text: text, updated_at: Time.now)
+      query_result.update!(text: text)
+      query_result
     else
-      self.create!(query_id: query_id, text: text, link: url)
+      create!(query_id: query_id, text: text, link: link)
     end
   end
 end
