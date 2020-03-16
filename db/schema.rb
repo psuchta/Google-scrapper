@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_06_142748) do
+ActiveRecord::Schema.define(version: 2020_03_16_094441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,20 +30,20 @@ ActiveRecord::Schema.define(version: 2020_03_06_142748) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
-  create_table "queries", force: :cascade do |t|
+  create_table "query_results", force: :cascade do |t|
+    t.text "text"
+    t.text "link"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "search_query_id"
+    t.index ["search_query_id"], name: "index_query_results_on_search_query_id"
+  end
+
+  create_table "search_queries", force: :cascade do |t|
     t.string "searched_quote"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "query_results", force: :cascade do |t|
-    t.bigint "query_id", null: false
-    t.text "text"
-    t.text "link"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["query_id"], name: "index_query_results_on_query_id"
-  end
-
-  add_foreign_key "query_results", "queries"
+  add_foreign_key "query_results", "search_queries"
 end
