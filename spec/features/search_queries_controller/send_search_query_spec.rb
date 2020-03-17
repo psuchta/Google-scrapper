@@ -11,7 +11,7 @@ describe 'Send search query' do
   end
 
   context 'with blank parameter' do
-    it 'raises exception', :vcr do
+    it 'redirects succesfully', :vcr do
       visit search_queries_path
       within('#new_search_query') do
         fill_in 'search_query_searched_quote', with: ''
