@@ -18,9 +18,7 @@ class GoogleLinksSearcher
   end
 
   def strip_links(search_results)
-    only_serching_results = search_results.links.select do |link|
-      link.href.include?('/url?q=')
-    end
+    only_serching_results = search_results.links.select { |link| link.href.include?('/url?q=') }
     only_serching_results.map do |link|
       url = link.href.to_s
       url = url.split(%r{=|&})[1]
