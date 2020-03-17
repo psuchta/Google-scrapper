@@ -20,8 +20,7 @@ class GoogleLinksSearcher
   def strip_links(search_results)
     only_serching_results = search_results.links.select { |link| link.href.include?('/url?q=') }
     only_serching_results.map do |link|
-      url = link.href.to_s
-      url = url.split(%r{=|&})[1]
+      url = link.href.to_s.split(%r{=|&})[1]
       OpenStruct.new(text: link.text, link: url)
     end
   end
