@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <%= form_for @search_query, html: { class: 'form-inline' } do |f| %>
+        <div class="form-group mb-2 mr-3">
+          <h4>Google Search</h4>
+        </div>
+        <div class="form-group mb-10">
+          <%= f.label :searched_quote, 'Query', class: 'sr-only' %>
+          <%= f.text_field :searched_quote, class: "form-control" %>
+        </div>
+        <%= f.submit 'Search', class: "btn btn-primary mb-2"%>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Query</th>
+            <th scope="col">Results count</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @search_queries.each do |search_query| %>
+            <tr>
+              <td>1</td>
+              <td><%= search_query.searched_quote %></td>
+              <td><%= search_query.query_results.count %></td>
+              <td>
+                <div class="row">
+                  <%= link_to 'Details', search_query, class: 'btn btn-primary' %>
+                  <%= link_to 'Edit', edit_search_query_path(search_query), class: 'btn btn-primary' %>
+                  <%= link_to 'Delete', search_query, method: :delete, class: 'btn btn-primary', data: { confirm: 'Are tou sure?' } %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
