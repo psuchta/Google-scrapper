@@ -1,6 +1,6 @@
-describe 'Send search query' do
+describe 'Send search query', :vcr do
   context 'with string parameter' do
-    it 'redirects succesfully and displays search_query object', :vcr do
+    it 'redirects succesfully and displays search_query object' do
       visit search_queries_path
       within('#new_search_query') do
         fill_in 'search_query_searched_quote', with: 'Rails'
@@ -12,7 +12,7 @@ describe 'Send search query' do
   end
 
   context 'with blank parameter' do
-    it 'redirects succesfully', :vcr do
+    it 'redirects succesfully' do
       visit search_queries_path
       within('#new_search_query') do
         fill_in 'search_query_searched_quote', with: ''
