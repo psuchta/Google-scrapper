@@ -1,5 +1,5 @@
-describe SearchQuery do
-  describe '#create_with_results', :vcr do
+describe SearchQuery, :vcr do
+  describe '#create_with_results' do
     context 'with string parameter' do
       let(:searched_quote) { 'Rails' }
       let(:google_query) do
@@ -34,7 +34,7 @@ describe SearchQuery do
     end
   end
 
-  describe '.update_or_create_query_results', :vcr do
+  describe '.update_or_create_query_results' do
     context 'when new search result occured' do
       it 'creates new query_result objects' do
         search_query = create(:search_query_with_query_results,
