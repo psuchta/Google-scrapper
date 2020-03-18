@@ -1,5 +1,5 @@
 describe 'delete query' do
-  it 'redirects succesfully', :vcr do
+  it 'redirects succesfully' do
     create(:search_query)
     visit search_queries_path
     click_link 'Delete'
