@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col">
+    <%= link_to 'Go details', search_query_path(@search_query), class: 'btn btn-primary' %>
+    <%= link_to 'Go to list', search_queries_path, class: 'btn btn-primary float-right' %>
+  </div>
+</div>
+<h1 class="text-center">Edit Query</h1>
+<div class="card">
+  <div class="card-body">
+    <%= form_for @search_query do |f| %>
+      <div class="form-group">
+        <%= f.label :searched_quote, 'Searched quote' %>
+        <%= f.text_field :searched_quote, class: 'form-control' %>
+      </div>
+      <%= f.submit 'Update', class: 'btn btn-success btn-block' %>
+    <% end %>
+  </div>
+</div>

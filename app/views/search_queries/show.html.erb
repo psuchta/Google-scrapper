@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col">
+    <%= link_to 'Go back', search_queries_path, class: 'btn btn-primary' %>
+    <%= link_to 'Edit', edit_search_query_path(@search_query), class: 'float-right btn btn-primary' %>
+  </div>
+</div>
+<h1 align="center">Query details</h1>
+<div class="card shadow">
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <strong>Searched phrase:</strong> <%= @search_query.searched_quote %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <strong>Query results count:</strong> <%= @search_query.query_results.count %>
+      </div>
+    </div>
+    <div class="card mt-4">
+      <div class="card-header">
+        <h5 class="mt-1">Query results</h3>
+      </div>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Title</th>
+              <th scope="col">Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @search_query.query_results.each do |query_result| %>
+              <tr scope="row">
+                <td><%= query_result.text %></td>
+                <td><%= link_to 'Go to page', query_result.link, class: 'btn btn-success btn-sm',style:'white-space: nowrap' %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
