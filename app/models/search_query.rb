@@ -6,11 +6,11 @@ class SearchQuery < ApplicationRecord
     created_query.update_or_create_query_results(search_engine: search_engine)
   end
 
-  def update_searched_quote(searched_quote)
+  def update_searched_quote(searched_quote:, search_engine: GoogleLinksSearcher.new )
     transaction do
       update!(searched_quote: searched_quote)
       query_results.delete_all
-      update_or_create_query_results
+      update_or_create_query_results(search_engine: search_engine)
     end
   end
 

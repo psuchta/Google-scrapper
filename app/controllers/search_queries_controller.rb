@@ -21,7 +21,7 @@ class SearchQueriesController < ApplicationController
   end
 
   def update
-    @search_query.update_searched_quote search_query_params[:searched_quote]
+    @search_query.update_searched_quote(searched_quote: search_query_params[:searched_quote])
     redirect_to search_queries_path, notice: 'Search Query updated!'
   end
 
