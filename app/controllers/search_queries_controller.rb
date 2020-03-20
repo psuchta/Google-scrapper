@@ -17,7 +17,7 @@ class SearchQueriesController < ApplicationController
 
   def create
     SearchQuery.create_with_results(search_query_params: search_query_params)
-    redirect_to search_queries_path
+    redirect_to search_queries_path, notice: 'Query created!'
   end
 
   private
