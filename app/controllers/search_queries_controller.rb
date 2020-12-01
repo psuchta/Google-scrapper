@@ -1,5 +1,5 @@
 class SearchQueriesController < ApplicationController
-  before_action :find_query, only: [:show, :edit, :destroy]
+  before_action :find_query, only: [:show, :edit, :destroy, :update]
 
   def index
     @search_query = SearchQuery.new
@@ -18,6 +18,11 @@ class SearchQueriesController < ApplicationController
   def create
     SearchQuery.create_with_results(search_query_params: search_query_params)
     redirect_to search_queries_path, notice: 'Query created!'
+  end
+
+  def update
+    @search_query.update_searched_quote(searched_quote: search_query_params[:searched_quote])
+    redirect_to search_queries_path, notice: 'Search Query updated!'
   end
 
   private
